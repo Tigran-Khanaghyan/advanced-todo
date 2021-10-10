@@ -3,7 +3,7 @@ import Input from "../../components/Input";
 
 export default function SignIn() {
     return (
-        <div>
+        <div className='signin-container'>
             <Input/>
             <Input/>
             <Button name="Sign In"/>

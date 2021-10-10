@@ -1,0 +1,9 @@
+.section {
+  margin: 5px;
+  height: 100vh;
+  width: 100%;
+
+  &-border {
+    border: 3px solid $base-color;
+  }
+}

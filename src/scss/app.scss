@@ -3,5 +3,11 @@
 
 @import 'reboot';
 @import 'variables';
-@import './button/button';
-@import './input/input'
+@import './base/button/button';
+@import './base/input/input';
+@import './base/section/section';
+
+// pages
+
+@import './pages/auth';
+@import './pages/dashboard'
