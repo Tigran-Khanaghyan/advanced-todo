@@ -1,9 +1,12 @@
-
-
-export default function Input() {
-    return(
-        <div>
-            <input type="text" className="input"/>
-        </div>
-    )
+export default function Input(type, onChange, placeholder) {
+  return (
+    <div>
+      <input
+        type={type}
+        className="input"
+        onChange={onChange}
+        placeholder={placeholder}
+      />
+    </div>
+  );
 }
