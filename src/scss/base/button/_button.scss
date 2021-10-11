@@ -1,7 +1,14 @@
 .btn {
-    margin: 10px;
-    height: 40px;
-    width: 100px;
+  margin: 10px;
+  background-color: $base-color;
+  color: white;
+
+  &-logOut {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    border: none;
     background-color: $base-color;
     color: white;
+  }
 }

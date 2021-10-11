@@ -6,4 +6,9 @@
   &-border {
     border: 3px solid $base-color;
   }
+
+  &-container {
+    display: flex;
+    flex-direction: row;
+  }
 }
