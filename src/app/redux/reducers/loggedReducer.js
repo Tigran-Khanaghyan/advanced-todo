@@ -1,6 +1,6 @@
 export const loggedReducer = (state = false, action) => {
   switch (action.type) {
-    case "IS-LOGGED":
+    case "IS_LOGGED":
       return !state;
     default:
       return state;

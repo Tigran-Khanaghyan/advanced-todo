@@ -1,5 +1,5 @@
 export const loggedToggler = () => {
     return {
-        type: 'IS-LOGGED',
+        type: 'IS_LOGGED',
     }
 }

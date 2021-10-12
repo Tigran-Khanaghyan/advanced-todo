@@ -19,7 +19,8 @@ const store = createStore(
 store.subscribe(() => {
     saveStore({
         users: store.getState().users,
-        isLogged: store.getState().isLogged
+        isLogged: store.getState().isLogged,
+        currentUser: store.getState().currentUser
       });
   });
 
