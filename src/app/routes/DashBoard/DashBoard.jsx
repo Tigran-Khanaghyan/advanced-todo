@@ -1,6 +1,7 @@
 import classNames from "classnames";
-import Button from "../../components/Button";
+
 import Header from "../../components/Header";
+import Tools from "../../components/Tools";
 
 export default function DashBoard() {
   const classes = classNames(["section", "section-border"]);
@@ -8,11 +9,11 @@ export default function DashBoard() {
   return (
     <main className="dashboard">
       <Header />
+      <Tools/>
       <div className='section-container'>
         <section className={classes}>
           <div>
             <p>To Do</p>
-            <Button name="Create Todo" className='btn'/>
           </div>
         </section>
         <section className={classes}>

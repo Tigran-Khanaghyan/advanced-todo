@@ -1,9 +1,11 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
+import { loadStore, saveStore } from "../../services/localStorage";
 import rootReducer from "./reducers";
 
 
-const initialState = {}
+const initialState = loadStore();
+
 const middleWare = [thunk]
 
 const store = createStore(
@@ -14,5 +16,11 @@ const store = createStore(
         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     )
 )
+store.subscribe(() => {
+    saveStore({
+        users: store.getState().users,
+        isLogged: store.getState().isLogged
+      });
+  });
 
 export default store

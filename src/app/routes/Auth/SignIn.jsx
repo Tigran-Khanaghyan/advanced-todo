@@ -8,14 +8,12 @@ import { loggedToggler } from "../../redux/actions/isLogged";
 function SignIn() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [user, setUser] = useState({});
 
   const dispatch = useDispatch();
 
   const handleClick = () => {
-      if (email && password) {
-      setUser({ user, password });
-      dispatch(addUser(user))
+      if (email && password) {;
+      dispatch(addUser({email, password}))
       dispatch(loggedToggler())
     }
   };
