@@ -2,19 +2,24 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { addUser } from "../../redux/actions/usersActions";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loggedToggler } from "../../redux/actions/isLogged";
+import { isUserExsist } from "../../../helpers/usersInfoHandlers/isUserExsist";
 
 function SignIn() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const users = useSelector((state) => state.users);
 
   const dispatch = useDispatch();
 
   const handleClick = () => {
-      if (email && password) {;
-      dispatch(addUser({email, password}))
-      dispatch(loggedToggler())
+    if (email && password) {
+      const isExsist = isUserExsist(users, email, password);
+      if (!isExsist) {
+        dispatch(addUser({ email, password, apps:[] }));
+      }
+      dispatch(loggedToggler());
     }
   };
   const handleEmail = (event) => {
@@ -33,4 +38,4 @@ function SignIn() {
   );
 }
 
-export default SignIn 
+export default SignIn;
