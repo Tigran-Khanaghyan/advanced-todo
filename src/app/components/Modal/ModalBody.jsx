@@ -2,7 +2,9 @@ import Input from "../Input";
 
 export default function ModalBody({ type, setAppName, appName }) {
   const handleAppName = (event) => {
-    setAppName(event.target.value);
+    if (type === "app") {
+      setAppName(event.target.value);
+    }
   };
 
   switch (type) {

@@ -9,10 +9,8 @@ import { useDispatch } from "react-redux";
 function ModifiedModal({ modal, setModal, type }) {
   const exampleModal = useRef();
   const store = useSelector((store) => store);
-  console.log(store);
   const dispatch = useDispatch();
   const currentUserId = store.currentUser;
-  console.log(currentUserId);
 
   const [appName, setAppName] = useState();
   const app = { appName: appName, sections: [] };
