@@ -24,10 +24,10 @@ export default function DropDownMenu({ show, setShow }) {
         Dropdown
       </button>
       <div className={classes} aria-labelledby="dropdownMenu">
-        {apps.map((app) => {
+        {Boolean(apps.length) && apps.map((app, index) => {
           return (
             <Button
-              key={app.appName}
+              key={index}
               className="dropdown-item"
               type="button"
               name={app.appName}

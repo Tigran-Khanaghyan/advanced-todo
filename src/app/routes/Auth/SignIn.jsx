@@ -11,8 +11,8 @@ import { currentUserId } from "../../redux/actions/currentUser";
 import { findUserId } from "../../../helpers/usersInfoHandlers/findUserId";
 
 function SignIn() {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const users = useSelector((state) => state.users);
   const history = useHistory();
 
@@ -23,7 +23,7 @@ function SignIn() {
       dispatch(loggedToggler());
       const isExsist = isUserExsist(users, email, password);
       const id = findUserId(users, email, password);
-      console.log(id)
+      console.log(id);
       if (!isExsist) {
         const userId = nanoid();
         dispatch(addUser({ userId, email, password, apps: [] }));
@@ -44,8 +44,18 @@ function SignIn() {
 
   return (
     <div className="signin-container">
-      <Input type="text" placeholder="email" onChange={handleEmail} />
-      <Input type="password" placeholder="password" onChange={handlePassword} />
+      <Input
+        value={email}
+        type="text"
+        placeholder="email"
+        onChange={handleEmail}
+      />
+      <Input
+        value={password}
+        type="password"
+        placeholder="password"
+        onChange={handlePassword}
+      />
       <Button name="Sign In" classname="btn" onClick={handleClick} />
     </div>
   );

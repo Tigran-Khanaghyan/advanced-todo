@@ -5,6 +5,7 @@ import Button from "../Button";
 import { useSelector } from "react-redux";
 import { addApp } from "../../redux/actions/appActions";
 import { useDispatch } from "react-redux";
+import { sections } from "../../../constants/sections";
 
 function ModifiedModal({ modal, setModal, type }) {
   const exampleModal = useRef();
@@ -13,7 +14,7 @@ function ModifiedModal({ modal, setModal, type }) {
   const currentUserId = store.currentUser;
 
   const [appName, setAppName] = useState();
-  const app = { appName: appName, sections: [] };
+  const app = { appName: appName, sections: sections };
 
   useEffect(() => {
     setModal(new Modal(exampleModal.current));
