@@ -1,14 +1,20 @@
-import { useSelector } from "react-redux";
-import SignIn from "./routes/Auth/SignIn";
+import { Switch, Route } from "react-router-dom";
+import { routes } from "../constants/routes";
+import PrivateRoute from "./components/PrivateRoute";
 import DashBoard from "./routes/DashBoard/DashBoard";
 
 function App() {
-  const isLogged = useSelector((state) => state.isLogged);
-
   return (
-    <>
-   {isLogged ? <DashBoard/> : <SignIn/>}
-   </>
+    <Switch>
+      <PrivateRoute exact path={routes.home().path}>
+        <DashBoard />
+      </PrivateRoute>
+      <Route
+        exact
+        path={routes.signIn().path}
+        component={routes.signIn().component}
+      />
+    </Switch>
   );
 }
 
