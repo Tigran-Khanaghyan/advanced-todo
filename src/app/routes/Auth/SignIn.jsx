@@ -1,9 +1,9 @@
 import Button from "../../components/Button";
 import Input from "../../components/Input";
-import { connect } from "react-redux";
 import { addUser } from "../../redux/actions/usersActions";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { loggedToggler } from "../../redux/actions/isLogged";
 
 function SignIn() {
   const [email, setEmail] = useState();
@@ -16,6 +16,7 @@ function SignIn() {
       if (email && password) {
       setUser({ user, password });
       dispatch(addUser(user))
+      dispatch(loggedToggler())
     }
   };
   const handleEmail = (event) => {
@@ -27,15 +28,11 @@ function SignIn() {
 
   return (
     <div className="signin-container">
-      <Input type="text" placeholder="email" onChange={e => handleEmail(e)} />
+      <Input type="text" placeholder="email" onChange={handleEmail} />
       <Input type="password" placeholder="password" onChange={handlePassword} />
       <Button name="Sign In" onClick={handleClick} />
     </div>
   );
 }
 
-const mapStateToProps = state => ({
-    user: state.user
-  });
-
-export default connect(mapStateToProps, { addUser })(SignIn);
+export default SignIn 
