@@ -1,8 +1,8 @@
-export const idReducer = (state, action) => {
+export const idReducer = (state = null, action) => {
   switch (action.type) {
     case "USER_ID":
       return action.payload;
     default:
-      return null
+      return state
   }
 };

@@ -2,11 +2,20 @@ import { Modal } from "bootstrap";
 import { useEffect, useRef, useState } from "react";
 import ModalBody from "./ModalBody";
 import Button from "../Button";
+import { useSelector } from "react-redux";
+import { addApp } from "../../redux/actions/appActions";
+import { useDispatch } from "react-redux";
 
 function ModifiedModal({ modal, setModal, type }) {
   const exampleModal = useRef();
+  const store = useSelector((store) => store);
+  console.log(store);
+  const dispatch = useDispatch();
+  const currentUserId = store.currentUser;
+  console.log(currentUserId);
+
   const [appName, setAppName] = useState();
-  
+  const app = { appName: appName, sections: [] };
 
   useEffect(() => {
     setModal(new Modal(exampleModal.current));
@@ -14,8 +23,10 @@ function ModifiedModal({ modal, setModal, type }) {
   }, []);
 
   const handleSaveChanges = () => {
-
-  }
+    dispatch(addApp(app, currentUserId));
+    setAppName("");
+    modal.hide();
+  };
 
   return (
     <>
@@ -51,6 +62,7 @@ function ModifiedModal({ modal, setModal, type }) {
                 onClick={() => modal.hide()}
               />
               <Button
+                onClick={handleSaveChanges}
                 name="Save changes"
                 type="button"
                 className="btn btn-primary"
