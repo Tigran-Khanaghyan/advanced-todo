@@ -1,4 +1,4 @@
-export default function Input(type, onChange, placeholder) {
+export default function Input({type, onChange, placeholder}) {
   return (
     <div>
       <input

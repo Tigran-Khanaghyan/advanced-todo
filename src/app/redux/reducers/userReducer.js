@@ -1,9 +1,9 @@
-export default function userReducer(state = [], action) {
+export default function userReducer(users = [], action) {
   switch (action.type) {
     case "NEW-USER":
-      state.push(action.payload);
-      return state;
+      users.push(action.payload);
+      return users;
     default:
-      return state;
+      return users;
   }
 }
