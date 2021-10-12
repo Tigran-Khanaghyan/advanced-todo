@@ -5,11 +5,13 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loggedToggler } from "../../redux/actions/isLogged";
 import { isUserExsist } from "../../../helpers/usersInfoHandlers/isUserExsist";
+import { useHistory } from "react-router";
 
 function SignIn() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const users = useSelector((state) => state.users);
+  const history = useHistory()
 
   const dispatch = useDispatch();
 
@@ -20,6 +22,7 @@ function SignIn() {
         dispatch(addUser({ email, password, apps:[] }));
       }
       dispatch(loggedToggler());
+      history.push('/')
     }
   };
   const handleEmail = (event) => {
