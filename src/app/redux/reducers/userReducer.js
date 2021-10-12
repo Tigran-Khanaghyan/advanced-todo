@@ -4,8 +4,9 @@ export default function userReducer(users = [], action) {
       users.push(action.payload);
       return users;
     case "NEW_APP":
-      console.log(users);
-      return;
+      const [user] = users.filter((user) => user.userId === action.userId);
+      user.apps.push(action.payload);
+      return users
     default:
       return users;
   }
