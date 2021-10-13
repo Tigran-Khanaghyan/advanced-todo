@@ -7,15 +7,22 @@ import { addApp } from "../../redux/actions/appActions";
 import { useDispatch } from "react-redux";
 import { sections } from "../../../constants/sections";
 import { setCurrentAppName } from "../../redux/actions/currentAppName";
+import { nanoid } from "nanoid";
+import { addTodo } from "../../redux/actions/todoActions";
 
 function ModifiedModal({ modal, setModal, type }) {
   const exampleModal = useRef();
   const store = useSelector((store) => store);
   const dispatch = useDispatch();
   const currentUserId = store.currentUser;
+  const currentAppName = store.appName;
+  const todoId = nanoid();
 
   const [appName, setAppName] = useState();
+  const [title, setTitle] = useState();
+  const [description, setDescription] = useState();
   const app = { appName: appName, sections: sections };
+  const todo = { title, description, uid: todoId };
 
   useEffect(() => {
     setModal(new Modal(exampleModal.current));
@@ -23,9 +30,15 @@ function ModifiedModal({ modal, setModal, type }) {
   }, []);
 
   const handleSaveChanges = () => {
-    dispatch(addApp(app, currentUserId));
-    dispatch(setCurrentAppName(appName));
-    setAppName("");
+    if (type === "app") {
+      dispatch(addApp(app, currentUserId));
+      dispatch(setCurrentAppName(appName));
+      setAppName("");
+    } else if (type === "todo") {
+      dispatch(addTodo(todo, currentUserId, currentAppName));
+      setTitle("");
+      setDescription("");
+    }
     modal.hide();
   };
 
@@ -52,6 +65,10 @@ function ModifiedModal({ modal, setModal, type }) {
               <ModalBody
                 appName={appName}
                 setAppName={setAppName}
+                title={title}
+                setTitle={setTitle}
+                description={description}
+                setDescription={setDescription}
                 type={type}
               />
             </div>

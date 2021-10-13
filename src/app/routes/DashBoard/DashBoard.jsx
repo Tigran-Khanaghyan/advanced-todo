@@ -8,7 +8,10 @@ import Tools from "../../components/Tools";
 export default function DashBoard() {
   const store = useSelector((state) => state);
   const currentApp = findCurrentApp(store);
-  const sections = currentApp.sections
+  let sections = null
+  if(currentApp){
+    sections = currentApp.sections
+  }
 
   const classes = classNames(["section", "section-border"]);
 
