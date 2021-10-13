@@ -24,7 +24,7 @@ function ModifiedModal({ modal, setModal, type }) {
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
   const app = { appName: appName, sections: sections };
-  const todo = { title, description, uid: todoId };
+  const todo = { title, description, disabled: false, uid: todoId };
 
   useEffect(() => {
     setModal(new Modal(exampleModal.current));
@@ -39,7 +39,7 @@ function ModifiedModal({ modal, setModal, type }) {
       setAppName("");
     } else if (type === "todo") {
       dispatch(addTodo(todo, currentUserId, currentAppName));
-      dispatch(todoMove(todo))
+      dispatch(todoMove(todo));
       setTitle("");
       setDescription("");
     }

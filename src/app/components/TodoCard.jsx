@@ -6,7 +6,7 @@ export default function TodoCard({
   description,
   uid,
   handleRightMove,
-  rightMoveDisable,
+  disabled
 }) {
   return (
     <div className="todo-container">
@@ -27,8 +27,8 @@ export default function TodoCard({
           name=">"
           className="btn"
           id={uid}
-          disabled={rightMoveDisable}
           onClick={handleRightMove}
+          disabled={disabled}
         />
       </div>
     </div>

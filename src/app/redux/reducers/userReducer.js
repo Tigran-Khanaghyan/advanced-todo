@@ -30,6 +30,9 @@ export default function userReducer(users = [], action) {
       );
       const [section, todo] = findTodo(sections, action.todoId);
       moveTodoIntoRight(sections, section, index, todo);
+      if (index + 2 === sections.length) {
+        todo.disabled = true;
+      }
       return users;
     }
     default:
