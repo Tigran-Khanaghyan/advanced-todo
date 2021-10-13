@@ -5,13 +5,21 @@ export default function TodoCard({
   title,
   description,
   uid,
-  handleRightMove,
-  disabled
+  handleMove,
+  right,
+  left,
 }) {
   return (
     <div className="todo-container">
       <div className="todo-btn">
-        <Button type="left" name="<" className="btn" id={uid} />
+        <Button
+          name="left"
+          buttonName="<"
+          className="btn"
+          id={uid}
+          onClick={handleMove}
+          disabled={left}
+        />
       </div>
       <div className="card w-75">
         <div className="card-header">{type}</div>
@@ -23,12 +31,12 @@ export default function TodoCard({
       </div>
       <div>
         <Button
-          type="right"
-          name=">"
+          name="right"
+          buttonName=">"
           className="btn"
           id={uid}
-          onClick={handleRightMove}
-          disabled={disabled}
+          onClick={handleMove}
+          disabled={right}
         />
       </div>
     </div>

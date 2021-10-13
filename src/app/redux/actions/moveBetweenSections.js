@@ -6,9 +6,9 @@ export const moveBetweenSections = (
 ) => {
   return {
     type: "MOVE_TODO_BETWEEN_SECTIONS",
+    direction: buttonType,
     userId: currentUserId,
     appName,
     todoId: uid,
-    direction: buttonType,
   };
 };

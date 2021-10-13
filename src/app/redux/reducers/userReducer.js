@@ -1,6 +1,7 @@
 import { findUserSections } from "../../../helpers/sectionInfoHandlers/findUserSections";
 import { findTodo } from "../../../helpers/todoInfoHandlers/findTodo";
 import { findTodoSectionIndex } from "../../../helpers/todoInfoHandlers/findTodoSectionIndex";
+import { moveTodoIntoleft } from "../../../helpers/todoInfoHandlers/moveTodoIntoleft";
 import { moveTodoIntoRight } from "../../../helpers/todoInfoHandlers/moveTodoIntoRight";
 
 export default function userReducer(users = [], action) {
@@ -29,9 +30,19 @@ export default function userReducer(users = [], action) {
         action.todoId
       );
       const [section, todo] = findTodo(sections, action.todoId);
-      moveTodoIntoRight(sections, section, index, todo);
-      if (index + 2 === sections.length) {
-        todo.disabled = true;
+      if (action.direction === "right") {
+        moveTodoIntoRight(sections, section, index, todo);
+        if(index + 2 === sections.length){
+          todo.right = true
+        }
+        todo.left = false
+      }
+      if (action.direction === "left") {
+        moveTodoIntoleft(sections, section, index, todo);
+        if(index - 1 === 0){
+          todo.left = true
+        }
+        todo.right = false
       }
       return users;
     }

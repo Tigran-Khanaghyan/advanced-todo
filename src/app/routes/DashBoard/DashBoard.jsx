@@ -22,9 +22,9 @@ export default function DashBoard() {
   const userId = store.currentUser;
   const appName = store.appName;
 
-  const handleRightMove = (event) => {
+  const handleMove = (event) => {
     const uid = event.target.id;
-    const buttonType = event.target.type;
+    const buttonType = event.target.name;
     const todo = findTodo(sections, uid);
     dispatch(moveBetweenSections(buttonType, userId, appName, uid));
     dispatch(todoMove(todo));
@@ -45,7 +45,7 @@ export default function DashBoard() {
                   <p>{section.name}</p>
                 </div>
                 {section.todos.map((todo) => {
-                  const { title, description, uid, disabled } = todo;
+                  const { title, description, uid, right, left } = todo;
                   return (
                     <div key={uid}>
                       <TodoCard
@@ -53,8 +53,9 @@ export default function DashBoard() {
                         type={section.name}
                         title={title}
                         description={description}
-                        handleRightMove={handleRightMove}
-                        disabled={disabled}
+                        handleMove={handleMove}
+                        right={right}
+                        left={left}
                       />
                     </div>
                   );

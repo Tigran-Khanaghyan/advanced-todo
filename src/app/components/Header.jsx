@@ -14,7 +14,7 @@ export default function Header() {
       Advanced Todo App
       <Button
         onClick={logOutHandler}
-        name="Log Out"
+        buttonName="Log Out"
         className="btn btn-logOut"
       />
     </div>

@@ -22,13 +22,13 @@ export default function Tools() {
       <DropDownMenu show={show} setShow={setShow} />
       <Button
         type="button"
-        name="New App +"
+        buttonName="New App +"
         className="btn"
         onClick={handleNewAppClick}
       />
       <Button
         type="button"
-        name="Create Todo +"
+        buttonName="Create Todo +"
         className="btn"
         onClick={handleCreateTodoClick}
       />
