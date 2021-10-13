@@ -28,7 +28,7 @@ export default function Tools() {
       />
       <Button
         type="button"
-        name="Create Todo"
+        name="Create Todo +"
         className="btn"
         onClick={handleCreateTodoClick}
       />

@@ -23,7 +23,6 @@ function SignIn() {
       dispatch(loggedToggler());
       const isExsist = isUserExsist(users, email, password);
       const id = findUserId(users, email, password);
-      console.log(id);
       if (!isExsist) {
         const userId = nanoid();
         dispatch(addUser({ userId, email, password, apps: [] }));

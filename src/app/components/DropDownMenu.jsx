@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { findCurrentUser } from "../../helpers/usersInfoHandlers/findCurrentUser";
 import Button from "./Button";
 
-export default function DropDownMenu({ show, setShow }) {
+export default function DropDownMenu({ show, setShow}) {
   const store = useSelector((state) => state);
   const handleClick = () => {
     setShow(!show);
@@ -21,7 +21,7 @@ export default function DropDownMenu({ show, setShow }) {
         aria-haspopup="true"
         aria-expanded="false"
       >
-        Dropdown
+        Choose App
       </button>
       <div className={classes} aria-labelledby="dropdownMenu">
         {Boolean(apps.length) && apps.map((app, index) => {

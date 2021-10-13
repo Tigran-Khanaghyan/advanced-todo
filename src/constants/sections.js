@@ -1,5 +1,5 @@
 export const sections = [
-  { name: "Todo" },
-  { name: "In Progress" },
-  { name: "Done" },
+  { name: "Todo", todos: []},
+  { name: "In Progress", todos: [] },
+  { name: "Done", todos: [] },
 ];
