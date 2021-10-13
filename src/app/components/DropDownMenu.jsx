@@ -21,7 +21,7 @@ export default function DropDownMenu({ show, setShow}) {
         aria-haspopup="true"
         aria-expanded="false"
       >
-        Dropdown
+        Choose App
       </button>
       <div className={classes} aria-labelledby="dropdownMenu">
         {Boolean(apps.length) && apps.map((app, index) => {

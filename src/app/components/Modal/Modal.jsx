@@ -9,6 +9,8 @@ import { sections } from "../../../constants/sections";
 import { setCurrentAppName } from "../../redux/actions/currentAppName";
 import { nanoid } from "nanoid";
 import { addTodo } from "../../redux/actions/todoActions";
+import { setCurrentApp } from "../../redux/actions/currentApp";
+import { todoMove } from "../../redux/actions/todoMove";
 
 function ModifiedModal({ modal, setModal, type }) {
   const exampleModal = useRef();
@@ -31,11 +33,13 @@ function ModifiedModal({ modal, setModal, type }) {
 
   const handleSaveChanges = () => {
     if (type === "app") {
+      dispatch(setCurrentApp(app));
       dispatch(addApp(app, currentUserId));
       dispatch(setCurrentAppName(appName));
       setAppName("");
     } else if (type === "todo") {
       dispatch(addTodo(todo, currentUserId, currentAppName));
+      dispatch(todoMove(todo))
       setTitle("");
       setDescription("");
     }

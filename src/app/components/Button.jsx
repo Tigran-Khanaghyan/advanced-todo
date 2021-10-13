@@ -1,7 +1,20 @@
-export default function Button({ type, name, className, onClick, }) {
+export default function Button({
+  type,
+  name,
+  className,
+  onClick,
+  id,
+  disabled,
+}) {
   return (
     <div>
-      <button type={type} className={className} onClick={onClick}>
+      <button
+        disabled={disabled}
+        id={id}
+        type={type}
+        className={className}
+        onClick={onClick}
+      >
         {name}
       </button>
     </div>
