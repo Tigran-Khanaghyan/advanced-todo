@@ -30,7 +30,7 @@ export default function DropDownMenu({ show, setShow}) {
               key={index}
               className="dropdown-item"
               type="button"
-              name={app.appName}
+              buttonName={app.appName}
             />
           );
         })}
