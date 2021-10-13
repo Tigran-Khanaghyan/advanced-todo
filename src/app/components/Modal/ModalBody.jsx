@@ -1,6 +1,6 @@
 import Input from "../Input";
 
-export default function ModalBody({ type, setAppName, appName }) {
+export default function ModalBody({ type, setAppName, appName='' }) {
   const handleAppName = (event) => {
     if (type === "app") {
       setAppName(event.target.value);

@@ -1,13 +1,14 @@
 import classNames from "classnames";
 import { useSelector } from "react-redux";
-import { findUserSections } from "../../../helpers/sectionHelpers/findUserSections";
+import { findCurrentApp } from "../../../helpers/appInfoHandlers/findCurrentApp";
 
 import Header from "../../components/Header";
 import Tools from "../../components/Tools";
 
 export default function DashBoard() {
   const store = useSelector((state) => state);
-  const sections = findUserSections(store);
+  const currentApp = findCurrentApp(store);
+  const sections = currentApp.sections
 
   const classes = classNames(["section", "section-border"]);
 
@@ -17,9 +18,9 @@ export default function DashBoard() {
       <Tools />
       <div className="section-container">
         {sections &&
-          sections.map((section) => {
+          sections.map((section, index) => {
             return (
-              <section className={classes}>
+              <section key={index} className={classes}>
                 <div>
                   <p>{section.name}</p>
                 </div>

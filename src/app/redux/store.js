@@ -20,7 +20,8 @@ store.subscribe(() => {
     saveStore({
         users: store.getState().users,
         isLogged: store.getState().isLogged,
-        currentUser: store.getState().currentUser
+        currentUser: store.getState().currentUser,
+        appName:store.getState().appName
       });
   });
 

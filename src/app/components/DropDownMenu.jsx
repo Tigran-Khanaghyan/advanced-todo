@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { findCurrentUser } from "../../helpers/usersInfoHandlers/findCurrentUser";
 import Button from "./Button";
 
-export default function DropDownMenu({ show, setShow }) {
+export default function DropDownMenu({ show, setShow}) {
   const store = useSelector((state) => state);
   const handleClick = () => {
     setShow(!show);

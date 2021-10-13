@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { addApp } from "../../redux/actions/appActions";
 import { useDispatch } from "react-redux";
 import { sections } from "../../../constants/sections";
+import { setCurrentAppName } from "../../redux/actions/currentAppName";
 
 function ModifiedModal({ modal, setModal, type }) {
   const exampleModal = useRef();
@@ -23,6 +24,7 @@ function ModifiedModal({ modal, setModal, type }) {
 
   const handleSaveChanges = () => {
     dispatch(addApp(app, currentUserId));
+    dispatch(setCurrentAppName(appName));
     setAppName("");
     modal.hide();
   };
