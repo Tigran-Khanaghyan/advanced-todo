@@ -1,8 +1,22 @@
-
-export default function Button({name, className, onClick}) {
-    return (
-        <div>
-            <button className={className} onClick={onClick}>{name}</button>
-        </div>
-    )
+export default function Button({
+  name,
+  buttonName,
+  className,
+  onClick,
+  id,
+  disabled,
+}) {
+  return (
+    <div>
+      <button
+        disabled={disabled}
+        id={id}
+        name={name}
+        className={className}
+        onClick={onClick}
+      >
+        {buttonName}
+      </button>
+    </div>
+  );
 }
