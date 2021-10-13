@@ -26,7 +26,7 @@ export default function TodoCard({
         <div className="card-body">
           <h5 className="card-title">{title}</h5>
           <p className="card-text">{description}</p>
-          <Button name="Edit" className="btn" />
+          <Button buttonName="Edit" className="btn" />
         </div>
       </div>
       <div>
