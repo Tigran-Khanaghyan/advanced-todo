@@ -55,7 +55,7 @@ function SignIn() {
         placeholder="password"
         onChange={handlePassword}
       />
-      <Button name="Sign In" classname="btn" onClick={handleClick} />
+      <Button buttonName="Sign In" className="btn" onClick={handleClick} />
     </div>
   );
 }

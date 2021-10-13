@@ -24,7 +24,7 @@ function ModifiedModal({ modal, setModal, type }) {
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
   const app = { appName: appName, sections: sections };
-  const todo = { title, description, uid: todoId };
+  const todo = { title, description, right: false, left: true, uid: todoId };
 
   useEffect(() => {
     setModal(new Modal(exampleModal.current));
@@ -39,7 +39,7 @@ function ModifiedModal({ modal, setModal, type }) {
       setAppName("");
     } else if (type === "todo") {
       dispatch(addTodo(todo, currentUserId, currentAppName));
-      dispatch(todoMove(todo))
+      dispatch(todoMove(todo));
       setTitle("");
       setDescription("");
     }
@@ -78,14 +78,14 @@ function ModifiedModal({ modal, setModal, type }) {
             </div>
             <div className="modal-footer">
               <Button
-                name="Close"
+                buttonName="Close"
                 type="button"
                 className="btn btn-secondary"
                 onClick={() => modal.hide()}
               />
               <Button
                 onClick={handleSaveChanges}
-                name="Save changes"
+                buttonName="Save changes"
                 type="button"
                 className="btn btn-primary"
               />

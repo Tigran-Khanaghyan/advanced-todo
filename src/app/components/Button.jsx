@@ -1,6 +1,6 @@
 export default function Button({
-  type,
   name,
+  buttonName,
   className,
   onClick,
   id,
@@ -11,11 +11,11 @@ export default function Button({
       <button
         disabled={disabled}
         id={id}
-        type={type}
+        name={name}
         className={className}
         onClick={onClick}
       >
-        {name}
+        {buttonName}
       </button>
     </div>
   );
