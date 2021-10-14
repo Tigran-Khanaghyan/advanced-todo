@@ -5,6 +5,7 @@ import { findCurrentApp } from "../../../helpers/appInfoHandlers/findCurrentApp"
 import { findTodo } from "../../../helpers/todoInfoHandlers/findTodo";
 
 import Header from "../../components/Header";
+import Loading from "../../components/Loading";
 import TodoCard from "../../components/TodoCard";
 import Tools from "../../components/Tools";
 import { moveBetweenSections } from "../../redux/actions/moveBetweenSections";
@@ -32,38 +33,42 @@ export default function DashBoard() {
 
   const classes = classNames(["section", "section-border"]);
 
-  return (
-    <main className="dashboard">
-      <Header buttonName='Log Out'/>
-      <Tools />
-      <div className="section-container">
-        {sections &&
-          sections.map((section, index) => {
-            return (
-              <section key={index} className={classes}>
-                <div className="section-header">
-                  <p>{section.name}</p>
-                </div>
-                {section.todos.map((todo) => {
-                  const { title, description, uid, right, left } = todo;
-                  return (
-                    <div key={uid}>
-                      <TodoCard
-                        uid={uid}
-                        type={section.name}
-                        title={title}
-                        description={description}
-                        handleMove={handleMove}
-                        right={right}
-                        left={left}
-                      />
-                    </div>
-                  );
-                })}
-              </section>
-            );
-          })}
-      </div>
-    </main>
-  );
+  const Main = () => {
+    return (
+      <main className="dashboard">
+        <Header buttonName="Log Out" />
+        <Tools />
+        <div className="section-container">
+          {sections &&
+            sections.map((section, index) => {
+              return (
+                <section key={index} className={classes}>
+                  <div className="section-header">
+                    <p>{section.name}</p>
+                  </div>
+                  {section.todos.map((todo) => {
+                    const { title, description, uid, right, left } = todo;
+                    return (
+                      <div key={uid}>
+                        <TodoCard
+                          uid={uid}
+                          type={section.name}
+                          title={title}
+                          description={description}
+                          handleMove={handleMove}
+                          right={right}
+                          left={left}
+                        />
+                      </div>
+                    );
+                  })}
+                </section>
+              );
+            })}
+        </div>
+      </main>
+    );
+  };
+
+  return store ? <Main /> : <Loading />;
 }

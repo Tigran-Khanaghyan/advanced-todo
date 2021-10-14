@@ -1,0 +1,29 @@
+.recovery {
+  display: flex;
+  flex-direction: column;
+  background-color: blueviolet;
+
+  &-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 1px solid green;
+    font-size: 20px;
+    font-weight: 600;
+    width: 40px;
+    height: 40px;
+    &-container {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+  &-hide {
+      display: none;
+  }
+}
+
+.cell-input {
+    width: 30px;
+    text-align: center;
+}

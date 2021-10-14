@@ -1,10 +1,20 @@
-export default function Input({ type, onChange, placeholder, value }) {
+export default function Input({
+  type,
+  onChange,
+  placeholder,
+  value,
+  className,
+  disabled = false,
+  maxLength,
+}) {
   return (
     <div>
       <input
+        maxLength={maxLength}
+        disabled={disabled}
         value={value}
         type={type}
-        className="input"
+        className={className}
         onChange={onChange}
         placeholder={placeholder}
       />
