@@ -23,6 +23,7 @@ store.subscribe(() => {
     currentApp: store.getState().currentApp,
     appName: store.getState().appName,
     movedTodo: store.getState().movedTodo,
+    sectionName: store.getState().sectionName,
   });
 });
 

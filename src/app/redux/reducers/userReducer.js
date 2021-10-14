@@ -1,3 +1,4 @@
+import { addNewSection } from "../../../helpers/sectionInfoHandlers/addNewSection";
 import { findUserSections } from "../../../helpers/sectionInfoHandlers/findUserSections";
 import { findTodo } from "../../../helpers/todoInfoHandlers/findTodo";
 import { findTodoSectionIndex } from "../../../helpers/todoInfoHandlers/findTodoSectionIndex";
@@ -32,20 +33,28 @@ export default function userReducer(users = [], action) {
       const [section, todo] = findTodo(sections, action.todoId);
       if (action.direction === "right") {
         moveTodoIntoRight(sections, section, index, todo);
-        if(index + 2 === sections.length){
-          todo.right = true
+        if (index + 2 === sections.length) {
+          todo.right = true;
         }
-        todo.left = false
+        todo.left = false;
       }
       if (action.direction === "left") {
         moveTodoIntoleft(sections, section, index, todo);
-        if(index - 1 === 0){
-          todo.left = true
+        if (index - 1 === 0) {
+          todo.left = true;
         }
-        todo.right = false
+        todo.right = false;
       }
       return users;
     }
+    case "NEW_SECTION":
+      const appSections = findUserSections(
+        users,
+        action.userId,
+        action.appName
+      );
+      addNewSection(appSections, action.payload);
+      return users;
     default:
       return users;
   }

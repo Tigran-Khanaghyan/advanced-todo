@@ -8,6 +8,8 @@ export default function ModalBody({
   setTitle,
   description = "",
   setDescription,
+  sectionName = "",
+  setSectionName,
 }) {
   const handleAppName = (event) => {
     setAppName(event.target.value);
@@ -18,6 +20,9 @@ export default function ModalBody({
   const handleDescription = (event) => {
     setDescription(event.target.value);
   };
+  const handleSectioName = (event) => {
+    setSectionName(event.target.value);
+  };
 
   switch (type) {
     case "app": {
@@ -26,19 +31,35 @@ export default function ModalBody({
           value={appName}
           onChange={handleAppName}
           placeholder="App name"
+          className="input"
         />
       );
     }
     case "todo":
       return (
         <div className="d-flex flex-column">
-          <Input placeholder="Todo name" value={title} onChange={handleTitle} />
           <Input
+            placeholder="Todo name"
+            value={title}
+            onChange={handleTitle}
+            className="input"
+          />
+          <Input
+            className="input"
             placeholder="Todo discription"
             value={description}
             onChange={handleDescription}
           />
         </div>
+      );
+    case "section":
+      return (
+        <Input
+          value={sectionName}
+          onChange={handleSectioName}
+          placeholder="Section name"
+          className="input"
+        />
       );
     default:
       return <> </>;
