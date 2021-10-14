@@ -23,6 +23,9 @@ export default function Tools() {
   const handleCreateTodoClick = () => {
     if (user.apps.length === 0) {
       setShowWarning(true);
+      setTimeout(() => {
+        setShowWarning(false)
+      }, 3000)
       return;
     }
     setModalType("todo");
