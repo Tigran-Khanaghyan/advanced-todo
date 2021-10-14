@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "./Button";
 import DropDownMenu from "./DropDownMenu";
-import WarningMessage from "./Alerts";
+import {WarningMessage} from "./Alerts";
 import ModifiedModal from "./Modal/Modal";
 import { useSelector } from "react-redux";
 import { findCurrentUser } from "../../helpers/usersInfoHandlers/findCurrentUser";

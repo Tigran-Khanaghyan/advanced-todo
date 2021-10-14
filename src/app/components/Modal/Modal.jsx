@@ -12,7 +12,7 @@ import { addTodo } from "../../redux/actions/todoActions";
 import { setCurrentApp } from "../../redux/actions/currentApp";
 import { todoMove } from "../../redux/actions/todoMove";
 import { checkUserAppNames } from "../../../helpers/appInfoHandlers/checkUserAppNames";
-import WarningMessage from "../Alerts";
+import {WarningMessage} from "../Alerts";
 import { SAME_NAMES_WARNING } from "../../../constants/messages";
 
 function ModifiedModal({ modal, setModal, type }) {

@@ -1,4 +1,4 @@
-export default function WarningMessage({ showWarning, setShowWarning, message }) {
+export const WarningMessage = ({ showWarning, setShowWarning, message }) => {
   let classes = showWarning
     ? "alert alert-warning"
     : "alert alert-warning d-none";
@@ -20,4 +20,9 @@ export default function WarningMessage({ showWarning, setShowWarning, message })
       </button>
     </div>
   );
+};
+
+export function ErrorMessage({ message, showError}) {
+  const classes = showError ? "danger" : "danger-hide"
+  return <div className={classes}>{message}</div>;
 }
