@@ -14,7 +14,7 @@ export default function DropDownMenu({ show, setShow }) {
   let classes = "dropdown-menu" + (show ? "-show" : "");
   const user = findCurrentUser(store);
   const apps = user.apps;
-
+  // eslint-disable-next-line
   const [index, setIndex] = useState(0);
   const handleAppNameClick = (index) => () => {
     setIndex(index);
@@ -32,7 +32,7 @@ export default function DropDownMenu({ show, setShow }) {
         aria-haspopup="true"
         aria-expanded="false"
       >
-        {apps.length ? apps[index].appName : "Choose App"}
+        {apps.length ? store.appName : "Choose App"}
       </button>
       <div className={classes} aria-labelledby="dropdownMenu">
         {Boolean(apps.length) &&

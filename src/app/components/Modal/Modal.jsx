@@ -12,8 +12,14 @@ import { addTodo } from "../../redux/actions/todoActions";
 import { setCurrentApp } from "../../redux/actions/currentApp";
 import { todoMove } from "../../redux/actions/todoMove";
 import { checkUserAppNames } from "../../../helpers/appInfoHandlers/checkUserAppNames";
-import {WarningMessage} from "../Alerts";
-import { SAME_NAMES_WARNING } from "../../../constants/messages";
+import { checkSectionsNames } from "../../../helpers/sectionInfoHandlers/checkSectionsNames";
+import { WarningMessage, SectionWarningMessage } from "../Alerts";
+import {
+  SAME_NAMES_WARNING,
+  SAME_SECTIONS_NAME,
+} from "../../../constants/messages";
+import { createNewSection } from "../../redux/actions/createNewSection";
+import { newSectionName } from "../../redux/actions/newSectionName";
 
 function ModifiedModal({ modal, setModal, type }) {
   const exampleModal = useRef();
@@ -21,6 +27,7 @@ function ModifiedModal({ modal, setModal, type }) {
   const dispatch = useDispatch();
   const currentUserId = store.currentUser;
   const currentAppName = store.appName;
+  const users = store.users;
   const todoId = nanoid();
 
   const [appName, setAppName] = useState();
@@ -29,12 +36,16 @@ function ModifiedModal({ modal, setModal, type }) {
   const app = { appName: appName, sections: sections };
   const todo = { title, description, right: false, left: true, uid: todoId };
 
+  const [sectionName, setSectionName] = useState();
+  const section = { name: sectionName, todos: [] };
+
   useEffect(() => {
     setModal(new Modal(exampleModal.current));
     // eslint-disable-next-line
   }, []);
 
   const [showWarning, setShowWarning] = useState();
+  const [showSectionWarning, setShowSectionWarning] = useState(false);
 
   const handleSaveChanges = () => {
     if (type === "app") {
@@ -55,6 +66,23 @@ function ModifiedModal({ modal, setModal, type }) {
       dispatch(todoMove(todo));
       setTitle("");
       setDescription("");
+    } else if (type === "section") {
+      const namesAreTheSame = checkSectionsNames(
+        users,
+        currentUserId,
+        currentAppName,
+        sectionName
+      );
+      if (namesAreTheSame) {
+        setShowSectionWarning(true);
+        setTimeout(() => {
+          setShowSectionWarning(false);
+        }, 2000);
+        return;
+      }
+      dispatch(createNewSection(section, currentUserId, currentAppName));
+      dispatch(newSectionName(sectionName));
+      setSectionName("");
     }
     modal.hide();
   };
@@ -87,6 +115,8 @@ function ModifiedModal({ modal, setModal, type }) {
                 description={description}
                 setDescription={setDescription}
                 type={type}
+                sectionName={sectionName}
+                setSectionName={setSectionName}
               />
             </div>
             <div className="modal-footer">
@@ -107,6 +137,11 @@ function ModifiedModal({ modal, setModal, type }) {
               message={SAME_NAMES_WARNING}
               showWarning={showWarning}
               setShowWarning={setShowWarning}
+            />
+            <SectionWarningMessage
+              showSectionWarning={showSectionWarning}
+              setShowSectionWarning={setShowSectionWarning}
+              sectionMessage={SAME_SECTIONS_NAME}
             />
           </div>
         </div>

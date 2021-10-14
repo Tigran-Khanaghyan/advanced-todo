@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "./Button";
 import DropDownMenu from "./DropDownMenu";
-import {WarningMessage} from "./Alerts";
+import { WarningMessage } from "./Alerts";
 import ModifiedModal from "./Modal/Modal";
 import { useSelector } from "react-redux";
 import { findCurrentUser } from "../../helpers/usersInfoHandlers/findCurrentUser";
@@ -12,6 +12,7 @@ export default function Tools() {
   const [modalType, setModalType] = useState();
   const [show, setShow] = useState();
   const [showWarning, setShowWarning] = useState(false);
+  const [showSectionWarning, setShowSectionWarning] = useState(false)
 
   const store = useSelector((state) => state);
   const user = findCurrentUser(store);
@@ -24,11 +25,22 @@ export default function Tools() {
     if (user.apps.length === 0) {
       setShowWarning(true);
       setTimeout(() => {
-        setShowWarning(false)
-      }, 3000)
+        setShowWarning(false);
+      }, 2000);
       return;
     }
     setModalType("todo");
+    modal.show();
+  };
+  const handleCreateSectionClick = () => {
+    if (user.apps.length === 0) {
+      setShowSectionWarning(true);
+      setTimeout(() => {
+        setShowSectionWarning(false);
+      }, 2000);
+      return;
+    }
+    setModalType("section");
     modal.show();
   };
 
@@ -41,6 +53,20 @@ export default function Tools() {
         className="btn"
         onClick={handleNewAppClick}
       />
+      <div>
+        <Button
+          type="button"
+          buttonName="Create Section +"
+          className="btn"
+          onClick={handleCreateSectionClick}
+        />
+        <WarningMessage
+          showWarning={showSectionWarning}
+          setShowWarning={setShowSectionWarning}
+          message={TODO_WARNING_MESSAGE}
+        />
+      </div>
+
       <div>
         <Button
           type="button"

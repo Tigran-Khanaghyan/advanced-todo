@@ -3,5 +3,5 @@ export function checkUserAppNames(store, appName) {
   const users = store.users;
   const [user] = users.filter((user) => user.userId === currentUserId);
   const apps = user.apps;
-  return apps.some((app) => app.appName === appName);
+  return apps.some((app) => app.appName.trim() === appName.trim());
 }
