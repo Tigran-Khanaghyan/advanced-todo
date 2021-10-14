@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "./Button";
 import DropDownMenu from "./DropDownMenu";
-import WarningMessage from "./Alerts";
+import {WarningMessage} from "./Alerts";
 import ModifiedModal from "./Modal/Modal";
 import { useSelector } from "react-redux";
 import { findCurrentUser } from "../../helpers/usersInfoHandlers/findCurrentUser";
@@ -23,6 +23,9 @@ export default function Tools() {
   const handleCreateTodoClick = () => {
     if (user.apps.length === 0) {
       setShowWarning(true);
+      setTimeout(() => {
+        setShowWarning(false)
+      }, 3000)
       return;
     }
     setModalType("todo");

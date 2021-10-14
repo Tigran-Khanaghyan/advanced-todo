@@ -34,7 +34,7 @@ export default function DashBoard() {
 
   return (
     <main className="dashboard">
-      <Header />
+      <Header buttonName='Log Out'/>
       <Tools />
       <div className="section-container">
         {sections &&

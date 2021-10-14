@@ -11,6 +11,9 @@ import { nanoid } from "nanoid";
 import { addTodo } from "../../redux/actions/todoActions";
 import { setCurrentApp } from "../../redux/actions/currentApp";
 import { todoMove } from "../../redux/actions/todoMove";
+import { checkUserAppNames } from "../../../helpers/appInfoHandlers/checkUserAppNames";
+import {WarningMessage} from "../Alerts";
+import { SAME_NAMES_WARNING } from "../../../constants/messages";
 
 function ModifiedModal({ modal, setModal, type }) {
   const exampleModal = useRef();
@@ -31,8 +34,18 @@ function ModifiedModal({ modal, setModal, type }) {
     // eslint-disable-next-line
   }, []);
 
+  const [showWarning, setShowWarning] = useState();
+
   const handleSaveChanges = () => {
     if (type === "app") {
+      const namesAreTheSame = checkUserAppNames(store, appName);
+      if (namesAreTheSame) {
+        setShowWarning(true);
+        setTimeout(() => {
+          setShowWarning(false);
+        }, 3000);
+        return;
+      }
       dispatch(setCurrentApp(app));
       dispatch(addApp(app, currentUserId));
       dispatch(setCurrentAppName(appName));
@@ -90,6 +103,11 @@ function ModifiedModal({ modal, setModal, type }) {
                 className="btn btn-primary"
               />
             </div>
+            <WarningMessage
+              message={SAME_NAMES_WARNING}
+              showWarning={showWarning}
+              setShowWarning={setShowWarning}
+            />
           </div>
         </div>
       </div>
