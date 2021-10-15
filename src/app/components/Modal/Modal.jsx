@@ -37,7 +37,7 @@ function ModifiedModal({ modal, setModal, type }) {
   const todo = { title, description, right: false, left: true, uid: todoId };
 
   const [sectionName, setSectionName] = useState();
-  const section = { name: sectionName, todos: [] };
+  const section = { name: sectionName, todos: [], left: true, right: true };
 
   useEffect(() => {
     setModal(new Modal(exampleModal.current));

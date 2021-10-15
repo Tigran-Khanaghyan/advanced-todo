@@ -3,19 +3,23 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { findCurrentApp } from "../../../helpers/appInfoHandlers/findCurrentApp";
 import { findTodo } from "../../../helpers/todoInfoHandlers/findTodo";
+import Button from "../../components/Button";
 
 import Header from "../../components/Header";
 import Loading from "../../components/Loading";
 import TodoCard from "../../components/TodoCard";
 import Tools from "../../components/Tools";
 import { moveBetweenSections } from "../../redux/actions/moveBetweenSections";
+import { moveSectionsAction } from "../../redux/actions/moveSectionsAction";
 import { todoMove } from "../../redux/actions/todoMove";
+import { newSectionName } from "../../redux/actions/newSectionName";
+import { nanoid } from "nanoid";
 
 export default function DashBoard() {
   const store = useSelector((state) => state);
   const dispatch = useDispatch();
   const currentApp = findCurrentApp(store);
-  let sections = null;
+  let sections = [];
   if (currentApp) {
     sections = currentApp.sections;
   }
@@ -30,6 +34,13 @@ export default function DashBoard() {
     dispatch(moveBetweenSections(buttonType, userId, appName, uid));
     dispatch(todoMove(todo));
   };
+  const handleSectionMove = (event) => {
+    const buttonType = event.target.name;
+    const sectionName = event.target.id;
+    const randomId = nanoid();
+    dispatch(moveSectionsAction(userId, buttonType, currentApp, sectionName));
+    dispatch(newSectionName(randomId));
+  };
 
   const classes = classNames(["section", "section-border"]);
 
@@ -39,12 +50,29 @@ export default function DashBoard() {
         <Header buttonName="Log Out" />
         <Tools />
         <div className="section-container">
-          {sections &&
+          {sections.length &&
             sections.map((section, index) => {
+              const { name, left, right } = section;
               return (
                 <section key={index} className={classes}>
                   <div className="section-header">
+                    <Button
+                      name="left"
+                      buttonName="<"
+                      className="btn"
+                      id={name}
+                      onClick={handleSectionMove}
+                      disabled={left}
+                    />
                     <p>{section.name}</p>
+                    <Button
+                      name="right"
+                      buttonName=">"
+                      className="btn"
+                      id={name}
+                      onClick={handleSectionMove}
+                      disabled={right}
+                    />
                   </div>
                   {section.todos.map((todo) => {
                     const { title, description, uid, right, left } = todo;
