@@ -1,5 +1,7 @@
 import { addNewSection } from "../../../helpers/sectionInfoHandlers/addNewSection";
 import { findUserSections } from "../../../helpers/sectionInfoHandlers/findUserSections";
+import { moveSection } from "../../../helpers/sectionInfoHandlers/moveSection";
+import { replaceSection } from "../../../helpers/sectionInfoHandlers/replaceSection";
 import { findTodo } from "../../../helpers/todoInfoHandlers/findTodo";
 import { findTodoSectionIndex } from "../../../helpers/todoInfoHandlers/findTodoSectionIndex";
 import { moveTodoIntoleft } from "../../../helpers/todoInfoHandlers/moveTodoIntoleft";
@@ -54,6 +56,20 @@ export default function userReducer(users = [], action) {
         action.appName
       );
       addNewSection(appSections, action.payload);
+      return users;
+    case "MOVE_SECTION":
+      const section = moveSection(
+        action.buttonType,
+        action.currentApp,
+        action.sectionName
+      );
+      replaceSection(
+        users,
+        action.userId,
+        action.currentApp,
+        action.sectionName,
+        section
+      );
       return users;
     default:
       return users;
