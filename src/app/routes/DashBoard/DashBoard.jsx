@@ -67,6 +67,7 @@ export default function DashBoard() {
                           classes={classes}
                         />
                       }
+                      classes='drag-and-drop'
                     />
                   </div>
                 );
