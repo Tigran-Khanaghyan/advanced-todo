@@ -35,18 +35,19 @@ export default function DropDownMenu({ show, setShow }) {
         {apps.length ? store.appName : "Choose App"}
       </button>
       <div className={classes} aria-labelledby="dropdownMenu">
-        {Boolean(apps.length) &&
-          apps.map((app, index) => {
-            return (
-              <Button
-                key={index}
-                className="dropdown-item"
-                type="button"
-                buttonName={app.appName}
-                onClick={handleAppNameClick(index)}
-              />
-            );
-          })}
+        {apps.length
+          ? apps.map((app, index) => {
+              return (
+                <Button
+                  key={index}
+                  className="dropdown-item"
+                  type="button"
+                  buttonName={app.appName}
+                  onClick={handleAppNameClick(index)}
+                />
+              );
+            })
+          : null}
       </div>
     </div>
   );

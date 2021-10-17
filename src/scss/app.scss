@@ -1,19 +1,19 @@
-@import '~bootstrap/scss/bootstrap.scss';
+@import "~bootstrap/scss/bootstrap.scss";
 
-
-@import 'reboot';
-@import 'variables';
-@import './base/button/button';
-@import './base/input/input';
-@import './base/section/section';
-@import './base/header/header';
-@import './base/tools/tools';
-@import './base/todo/todo';
-@import './base/alerts/alerts';
-@import './base/capcha/capcha';
-@import './base/recovery/recovery';
+@import "reboot";
+@import "variables";
+@import "./base/button/button";
+@import "./base/input/input";
+@import "./base/section/section";
+@import "./base/header/header";
+@import "./base/tools/tools";
+@import "./base/todo/todo";
+@import "./base/alerts/alerts";
+@import "./base/capcha/capcha";
+@import "./base/recovery/recovery";
+@import "./base/dragAndDrop/dragAndDrop.scss";
 
 // pages
 
-@import './pages/auth';
-@import './pages/dashboard'
+@import "./pages/auth";
+@import "./pages/dashboard";

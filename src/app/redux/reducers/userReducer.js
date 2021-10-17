@@ -34,14 +34,14 @@ export default function userReducer(users = [], action) {
       );
       const [section, todo] = findTodo(sections, action.todoId);
       if (action.direction === "right") {
-        moveTodoIntoRight(sections, section, index, todo);
+        moveTodoIntoRight(sections, section, index, todo, action.todoId);
         if (index + 2 === sections.length) {
           todo.right = true;
         }
         todo.left = false;
       }
       if (action.direction === "left") {
-        moveTodoIntoleft(sections, section, index, todo);
+        moveTodoIntoleft(sections, section, index, todo, action.todoId);
         if (index - 1 === 0) {
           todo.left = true;
         }
