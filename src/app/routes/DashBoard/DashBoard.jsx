@@ -3,17 +3,16 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { findCurrentApp } from "../../../helpers/appInfoHandlers/findCurrentApp";
 import { findTodo } from "../../../helpers/todoInfoHandlers/findTodo";
-import Button from "../../components/Button";
-
 import Header from "../../components/Header";
 import Loading from "../../components/Loading";
-import TodoCard from "../../components/TodoCard";
 import Tools from "../../components/Tools";
 import { moveBetweenSections } from "../../redux/actions/moveBetweenSections";
 import { moveSectionsAction } from "../../redux/actions/moveSectionsAction";
 import { todoMove } from "../../redux/actions/todoMove";
 import { newSectionName } from "../../redux/actions/newSectionName";
 import { nanoid } from "nanoid";
+import DragAndDrop from "../../components/DragAndDrop";
+import Section from "../../components/Section";
 
 export default function DashBoard() {
   const store = useSelector((state) => state);
@@ -50,49 +49,29 @@ export default function DashBoard() {
         <Header buttonName="Log Out" />
         <Tools />
         <div className="section-container">
-          {sections.length &&
-            sections.map((section, index) => {
-              const { name, left, right } = section;
-              return (
-                <section key={index} className={classes}>
-                  <div className="section-header">
-                    <Button
-                      name="left"
-                      buttonName="<"
-                      className="btn"
-                      id={name}
-                      onClick={handleSectionMove}
-                      disabled={left}
-                    />
-                    <p>{section.name}</p>
-                    <Button
-                      name="right"
-                      buttonName=">"
-                      className="btn"
-                      id={name}
-                      onClick={handleSectionMove}
-                      disabled={right}
+          {sections.length
+            ? sections.map((section, index) => {
+                const { name, left, right } = section;
+                return (
+                  <div className={classes} key={index}>
+                    <DragAndDrop
+                      child={
+                        <Section
+                          index={index}
+                          name={name}
+                          handleSectionMove={handleSectionMove}
+                          left={left}
+                          section={section}
+                          right={right}
+                          handleMove={handleMove}
+                          classes={classes}
+                        />
+                      }
                     />
                   </div>
-                  {section.todos.map((todo) => {
-                    const { title, description, uid, right, left } = todo;
-                    return (
-                      <div key={uid}>
-                        <TodoCard
-                          uid={uid}
-                          type={section.name}
-                          title={title}
-                          description={description}
-                          handleMove={handleMove}
-                          right={right}
-                          left={left}
-                        />
-                      </div>
-                    );
-                  })}
-                </section>
-              );
-            })}
+                );
+              })
+            : null}
         </div>
       </main>
     );
