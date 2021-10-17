@@ -1,23 +1,46 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 export default function DragAndDrop({ child, classes }) {
-  const elemRef = useRef(null);
-  const [click, setClick] = useState(false);
+  // const elemRef = useRef(null);
 
-  useEffect(() => {
-    console.log(elemRef.current.getBoundingClientRect());
-    console.log(elemRef.current)
-  }, [click]);
-  const handleClick = (event) => {
-    setClick(!click);
-    event.stopPropagation();
-    event.preventDefault();
-    console.log(event.target);
-  };
+  // useEffect(() => {
+  //   elemRef.current.addEventListener('click', handlClick)
+  //   elemRef.current.addEventListener("mousedown", handleMove);
+  //   elemRef.current.addEventListener("dragstart", () => {
+  //     return false;
+  //   });
+  // });
 
-  return (
-    <div className='drag-and-drop' ref={elemRef} onClick={handleClick}>
-      {child}
-    </div>
-  );
+  // const handleMove = (event) => {
+
+  //   let element = elemRef.current;
+
+  //   event.stopPropagation();
+  //   event.preventDefault();
+
+  //   element.style.position = "absolute";
+  //   element.style.zIndex = 1000;
+  //   document.body.append(element);
+
+  //   moveAt(event.pageX, event.pageY);
+  //   function moveAt(pageX, pageY) {
+  //     element.style.left = pageX - element.offsetWidth / 2 + "px";
+  //     element.style.top = pageY - element.offsetHeight / 2 + "px";
+  //   }
+
+  //   function onMouseMove(event) {
+  //     moveAt(event.pageX, event.pageY);
+  //   }
+  //   document.addEventListener("mousemove", onMouseMove);
+
+  //   element.onmouseup = function () {
+  //     document.removeEventListener("mousemove", onMouseMove);
+  //     element.onmouseup = null;
+  //   };
+  // };
+  // const handlClick = (event) => {
+  //   console.log(event.target.name)
+  // }
+
+  return <div className={classes}>{child}</div>;
 }
