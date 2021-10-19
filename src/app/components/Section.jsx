@@ -1,5 +1,4 @@
 import Button from "./Button";
-import DragAndDrop from "./DragAndDrop";
 import TodoCard from "./TodoCard";
 
 export default function Section({
@@ -9,8 +8,12 @@ export default function Section({
   section,
   right,
   handleMove,
-  classes,
 }) {
+  const handleDrag = (event) => {
+    const data = event.target.dataset.todo;
+    event.dataTransfer.setData("todo", data);
+  };
+
   return (
     <section>
       <div className="section-header">
@@ -35,19 +38,21 @@ export default function Section({
       {section.todos.map((todo) => {
         const { title, description, uid, right, left } = todo;
         return (
-          <div key={uid}>
-            <DragAndDrop
-              child={
-                <TodoCard
-                  uid={uid}
-                  type={section.name}
-                  title={title}
-                  description={description}
-                  handleMove={handleMove}
-                  right={right}
-                  left={left}
-                />
-              }
+          <div
+            key={uid}
+            onDragStart={handleDrag}
+            draggable={true}
+            data-todo="todo"
+            id="todo"
+          >
+            <TodoCard
+              uid={uid}
+              type={section.name}
+              title={title}
+              description={description}
+              handleMove={handleMove}
+              right={right}
+              left={left}
             />
           </div>
         );

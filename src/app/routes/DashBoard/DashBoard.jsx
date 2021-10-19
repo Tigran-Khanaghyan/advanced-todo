@@ -44,6 +44,16 @@ export default function DashBoard() {
   const classes = classNames(["section", "section-border"]);
 
   const Main = () => {
+    const allowDrop = (event) => {
+      event.preventDefault();
+    };
+    const handleDrop = (event) => {
+      const data = event.dataTransfer.getData("todo");
+      console.log(data);
+      const element = document.getElementById(data);
+      const section = event.target;
+      section.append(element);
+    };
     return (
       <main className="dashboard">
         <Header buttonName="Log Out" />
@@ -53,21 +63,21 @@ export default function DashBoard() {
             ? sections.map((section, index) => {
                 const { name, left, right } = section;
                 return (
-                  <div className={classes} key={index}>
-                    <DragAndDrop
-                      child={
-                        <Section
-                          index={index}
-                          name={name}
-                          handleSectionMove={handleSectionMove}
-                          left={left}
-                          section={section}
-                          right={right}
-                          handleMove={handleMove}
-                          classes={classes}
-                        />
-                      }
-                      classes='drag-and-drop'
+                  <div
+                    className={classes}
+                    key={index}
+                    onDragOver={allowDrop}
+                    onDrop={handleDrop}
+                  >
+                    <Section
+                      index={index}
+                      name={name}
+                      handleSectionMove={handleSectionMove}
+                      left={left}
+                      section={section}
+                      right={right}
+                      handleMove={handleMove}
+                      classes={classes}
                     />
                   </div>
                 );
