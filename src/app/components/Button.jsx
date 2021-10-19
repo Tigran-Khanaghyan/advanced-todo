@@ -5,10 +5,12 @@ export default function Button({
   onClick,
   id,
   disabled,
+  type,
 }) {
   return (
     <div>
       <button
+        type={type}
         disabled={disabled}
         id={id}
         name={name}

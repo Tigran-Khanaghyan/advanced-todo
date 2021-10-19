@@ -6,6 +6,7 @@ import userReducer from "./userReducer";
 import { currentAppReducer } from "./currentAppReducer";
 import { moveTodoReducer } from "./movedTodoReducer";
 import { sectionNameReducer } from "./sectionNameReducer";
+import { coordinatesReducer } from "./coordinatesReducer";
 
 const rootReducer = combineReducers({
   users: userReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   appName: appNameReducer,
   movedTodo: moveTodoReducer,
   sectionName: sectionNameReducer,
+  coordinates: coordinatesReducer,
 });
 
 export default rootReducer;

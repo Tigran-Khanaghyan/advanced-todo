@@ -15,6 +15,7 @@ import DragAndDrop from "../../components/DragAndDrop";
 import Section from "../../components/Section";
 
 export default function DashBoard() {
+  let elems = [];
   const store = useSelector((state) => state);
   const dispatch = useDispatch();
   const currentApp = findCurrentApp(store);
@@ -22,7 +23,6 @@ export default function DashBoard() {
   if (currentApp) {
     sections = currentApp.sections;
   }
-
   const userId = store.currentUser;
   const appName = store.appName;
 
@@ -53,7 +53,7 @@ export default function DashBoard() {
             ? sections.map((section, index) => {
                 const { name, left, right } = section;
                 return (
-                  <div className={classes} key={index}>
+                  <div name={name} className={classes} key={index}>
                     <DragAndDrop
                       child={
                         <Section
@@ -65,9 +65,12 @@ export default function DashBoard() {
                           right={right}
                           handleMove={handleMove}
                           classes={classes}
+                          elems={elems}
                         />
                       }
-                      classes='drag-and-drop'
+                      classes="drag-and-drop"
+                      id={name}
+                      elems={elems}
                     />
                   </div>
                 );

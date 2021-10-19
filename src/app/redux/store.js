@@ -24,6 +24,7 @@ store.subscribe(() => {
     appName: store.getState().appName,
     movedTodo: store.getState().movedTodo,
     sectionName: store.getState().sectionName,
+    coordinates: store.getState().coordinates,
   });
 });
 

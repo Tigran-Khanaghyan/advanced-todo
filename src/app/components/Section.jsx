@@ -9,10 +9,10 @@ export default function Section({
   section,
   right,
   handleMove,
-  classes,
+  elems
 }) {
   return (
-    <section>
+    <section id={name}>
       <div className="section-header">
         <Button
           name="left"
@@ -48,6 +48,7 @@ export default function Section({
                   left={left}
                 />
               }
+              elems={elems}
             />
           </div>
         );
