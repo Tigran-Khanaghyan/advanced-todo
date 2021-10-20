@@ -47,7 +47,6 @@ export default function userReducer(users = [], action) {
         }
         todo.right = false;
       } else {
-        console.log(section)
         moveInsightSection(section, action.currentIndex, action.index);
       }
       return users;

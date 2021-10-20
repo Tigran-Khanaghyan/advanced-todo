@@ -36,28 +36,29 @@ export default function Section({
           disabled={right}
         />
       </div>
-      {section.todos.map((todo, todoIndex) => {
-        const { title, description, uid, right, left } = todo;
-        return (
-          <article
-            key={uid}
-            onDragStart={handleDrag}
-            draggable={true}
-            data-todo={`todo-${sectionIndex}-${todoIndex}`}
-            id={`todo-${sectionIndex}-${todoIndex}`}
-          >
-            <TodoCard
-              uid={uid}
-              type={section.name}
-              title={title}
-              description={description}
-              handleMove={handleMove}
-              right={right}
-              left={left}
-            />
-          </article>
-        );
-      })}
+      {!!section.todos.length &&
+        section.todos.map((todo, todoIndex) => {
+          const { title, description, uid, right, left } = todo;
+          return (
+            <article
+              key={uid}
+              onDragStart={handleDrag}
+              draggable={true}
+              data-todo={`todo-${sectionIndex}-${todoIndex}`}
+              id={`todo-${sectionIndex}-${todoIndex}`}
+            >
+              <TodoCard
+                uid={uid}
+                type={section.name}
+                title={title}
+                description={description}
+                handleMove={handleMove}
+                right={right}
+                left={left}
+              />
+            </article>
+          );
+        })}
     </section>
   );
 }

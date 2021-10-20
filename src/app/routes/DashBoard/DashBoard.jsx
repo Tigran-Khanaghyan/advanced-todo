@@ -51,7 +51,6 @@ export default function DashBoard() {
 
   const Main = () => {
     const [isSection, setIsSection] = useState(false);
-
     const allowTodoDrop = (event) => {
       event.preventDefault();
       if (event.target.closest("section")) {
@@ -102,7 +101,9 @@ export default function DashBoard() {
             todoIndex
           )
         );
-        dispatch(todoMove(todo));
+        let newTodo = findTodo(sections, uid);
+        dispatch(todoMove(newTodo));
+
         sectionIndex = null;
         currentSectionIndex = null;
         todoIndex = null;
