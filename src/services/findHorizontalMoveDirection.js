@@ -1,4 +1,4 @@
-export function findMoveDirection(prevIndex, index) {
+export function findHorizontalMoveDirection(prevIndex, index) {
   let direction = null;
 
   
