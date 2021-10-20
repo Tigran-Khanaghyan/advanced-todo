@@ -13,7 +13,7 @@ import { newSectionName } from "../../redux/actions/newSectionName";
 import { nanoid } from "nanoid";
 import Section from "../../components/Section";
 import { useState } from "react";
-import { findMoveDirection } from "../../../services/findMoveDirection";
+import { findHorizontalMoveDirection } from "../../../services/findHorizontalMoveDirection";
 
 export default function DashBoard() {
   const store = useSelector((state) => state);
@@ -43,8 +43,11 @@ export default function DashBoard() {
   };
 
   const classes = classNames(["section-border", "section"]);
-  let sectionIndex = null;
   let currentSectionIndex = null;
+  let sectionIndex = null;
+  let currentTodoIndex = null;
+  let todoIndex = null;
+  let counter = 0;
 
   const Main = () => {
     const [isSection, setIsSection] = useState(false);
@@ -63,6 +66,17 @@ export default function DashBoard() {
           setIsSection(true);
         }, 0);
       }
+      if (event.target.closest("article")) {
+        ++counter;
+        let todo = event.target.closest("article");
+        if (counter === 1) {
+          currentTodoIndex = todo.dataset.todo.split("-")[2];
+        }
+        todoIndex = todo.dataset.todo.split("-")[2];
+        setTimeout(() => {
+          setIsSection(true);
+        }, 0);
+      }
       setIsSection(false);
     };
 
@@ -74,11 +88,26 @@ export default function DashBoard() {
 
       if (isSection) {
         section.append(todo);
-        let buttonType = findMoveDirection(currentSectionIndex, sectionIndex);
-        dispatch(moveBetweenSections(buttonType, userId, appName, uid));
+        let buttonType = findHorizontalMoveDirection(
+          currentSectionIndex,
+          sectionIndex
+        );
+        dispatch(
+          moveBetweenSections(
+            buttonType,
+            userId,
+            appName,
+            uid,
+            currentTodoIndex,
+            todoIndex
+          )
+        );
         dispatch(todoMove(todo));
         sectionIndex = null;
         currentSectionIndex = null;
+        todoIndex = null;
+        currentTodoIndex = null;
+        counter = 0;
       }
     };
 
