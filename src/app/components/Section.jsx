@@ -8,6 +8,7 @@ export default function Section({
   section,
   right,
   handleMove,
+  sectionIndex,
 }) {
   const handleDrag = (event) => {
     const data = event.target.dataset.todo;
@@ -15,7 +16,7 @@ export default function Section({
   };
 
   return (
-    <section>
+    <section id={sectionIndex}>
       <div className="section-header">
         <Button
           name="left"
@@ -35,15 +36,15 @@ export default function Section({
           disabled={right}
         />
       </div>
-      {section.todos.map((todo) => {
+      {section.todos.map((todo, todoIndex) => {
         const { title, description, uid, right, left } = todo;
         return (
-          <div
+          <article
             key={uid}
             onDragStart={handleDrag}
             draggable={true}
-            data-todo="todo"
-            id="todo"
+            data-todo={`todo-${sectionIndex}-${todoIndex}`}
+            id={`todo-${sectionIndex}-${todoIndex}`}
           >
             <TodoCard
               uid={uid}
@@ -54,7 +55,7 @@ export default function Section({
               right={right}
               left={left}
             />
-          </div>
+          </article>
         );
       })}
     </section>
