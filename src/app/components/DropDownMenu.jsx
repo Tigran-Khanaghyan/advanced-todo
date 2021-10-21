@@ -4,14 +4,17 @@ import { useSelector } from "react-redux";
 import { findCurrentUser } from "../../helpers/usersInfoHandlers/findCurrentUser";
 import { setCurrentAppName } from "../redux/actions/currentAppName";
 import Button from "./Button";
+import { ReactComponent as DeleteIcon } from "../../assets/images/Icons/delete.svg";
+import { deleteApp } from "../redux/actions/appActions";
 
 export default function DropDownMenu({ show, setShow }) {
+  const [appName, setAppName] = useState("");
+
   const store = useSelector((state) => state);
   const dispatch = useDispatch();
   const handleClick = () => {
     setShow(!show);
   };
-  let classes = "dropdown-menu" + (show ? "-show" : "");
   const user = findCurrentUser(store);
   const apps = user.apps;
   // eslint-disable-next-line
@@ -20,6 +23,14 @@ export default function DropDownMenu({ show, setShow }) {
     setIndex(index);
     dispatch(setCurrentAppName(apps[index].appName));
   };
+
+  const handleAppDelete = (index) => {
+    dispatch(deleteApp(apps, index));
+    dispatch(setCurrentAppName(null));
+    setAppName(appName);
+    setIndex(index);
+  };
+  const classes = "dropdown-menu" + (show ? "-show" : "");
 
   return (
     <div className="dropdown">
@@ -38,13 +49,21 @@ export default function DropDownMenu({ show, setShow }) {
         {apps.length
           ? apps.map((app, index) => {
               return (
-                <Button
-                  key={index}
-                  className="dropdown-item"
-                  type="button"
-                  buttonName={app.appName}
-                  onClick={handleAppNameClick(index)}
-                />
+                <div key={index}>
+                  <div className="d-inline-flex" key={index}>
+                    <div>
+                      <Button
+                        className="dropdown-item"
+                        type="button"
+                        buttonName={app.appName}
+                        onClick={handleAppNameClick(index)}
+                      />
+                    </div>
+                    <div onClick={() => handleAppDelete(apps, index)}>
+                      <DeleteIcon />
+                    </div>
+                  </div>
+                </div>
               );
             })
           : null}

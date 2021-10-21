@@ -1,3 +1,4 @@
+import { deleteApp } from "../../../helpers/appInfoHandlers/deleteApp";
 import { addNewSection } from "../../../helpers/sectionInfoHandlers/addNewSection";
 import { findUserSections } from "../../../helpers/sectionInfoHandlers/findUserSections";
 import { moveSection } from "../../../helpers/sectionInfoHandlers/moveSection";
@@ -12,6 +13,9 @@ export default function userReducer(users = [], action) {
     case "NEW_APP":
       const [user] = users.filter((user) => user.userId === action.userId);
       user.apps.push(action.payload);
+      return users;
+    case "DELETE_APP":
+      deleteApp(action.apps, action.index);
       return users;
     case "NEW_TODO":
       const sections = findUserSections(

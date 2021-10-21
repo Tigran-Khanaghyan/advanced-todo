@@ -5,3 +5,12 @@ export const addApp = (app, id) => {
     payload: app,
   };
 };
+
+export const deleteApp = (apps, index) => {
+  return {
+    type: "DELETE_APP",
+    apps,
+    index
+  };
+};
+
