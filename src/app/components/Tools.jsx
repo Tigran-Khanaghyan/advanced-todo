@@ -80,7 +80,13 @@ export default function Tools() {
           message={TODO_WARNING_MESSAGE}
         />
       </div>
-      <ModifiedModal modal={modal} setModal={setModal} type={modalType} />
+      <ModifiedModal
+        modal={modal}
+        setModal={setModal}
+        type={modalType}
+        classes="modal fade"
+      />
+
       <></>
     </div>
   );

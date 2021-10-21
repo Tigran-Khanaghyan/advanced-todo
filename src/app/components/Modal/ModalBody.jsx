@@ -10,6 +10,7 @@ export default function ModalBody({
   setDescription,
   sectionName = "",
   setSectionName,
+  message = "",
 }) {
   const handleAppName = (event) => {
     setAppName(event.target.value);
@@ -60,6 +61,12 @@ export default function ModalBody({
           placeholder="Section name"
           className="input"
         />
+      );
+    case "delete-app":
+      return (
+        <p>
+          <strong>{message}</strong>
+        </p>
       );
     default:
       return <> </>;

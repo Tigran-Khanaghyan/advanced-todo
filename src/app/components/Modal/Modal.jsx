@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import ModalBody from "./ModalBody";
 import Button from "../Button";
 import { useSelector } from "react-redux";
-import { addApp } from "../../redux/actions/appActions";
+import { addApp} from "../../redux/actions/appActions";
 import { useDispatch } from "react-redux";
 import { sections } from "../../../constants/sections";
 import { setCurrentAppName } from "../../redux/actions/currentAppName";
@@ -21,14 +21,14 @@ import {
 import { createNewSection } from "../../redux/actions/createNewSection";
 import { newSectionName } from "../../redux/actions/newSectionName";
 
-function ModifiedModal({ modal, setModal, type }) {
+function ModifiedModal({ modal, setModal, type, classes, apps, appIndex }) {
   const exampleModal = useRef();
   const store = useSelector((store) => store);
-  const dispatch = useDispatch();
   const currentUserId = store.currentUser;
   const currentAppName = store.appName;
   const users = store.users;
   const todoId = nanoid();
+  const dispatch = useDispatch();
 
   const [appName, setAppName] = useState();
   const [title, setTitle] = useState();
@@ -86,11 +86,10 @@ function ModifiedModal({ modal, setModal, type }) {
     }
     modal.hide();
   };
-
   return (
-    <>
+    <div>
       <div
-        className="modal fade"
+        className={classes}
         ref={exampleModal}
         tabIndex="-1"
         aria-labelledby="exampleModalLabel"
@@ -121,14 +120,14 @@ function ModifiedModal({ modal, setModal, type }) {
             </div>
             <div className="modal-footer">
               <Button
-                buttonName="Close"
+                buttonName="Save Changes"
                 type="button"
                 className="btn btn-secondary"
                 onClick={() => modal.hide()}
               />
               <Button
                 onClick={handleSaveChanges}
-                buttonName="Save changes"
+                buttonName="Close"
                 type="button"
                 className="btn btn-primary"
               />
@@ -146,7 +145,7 @@ function ModifiedModal({ modal, setModal, type }) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

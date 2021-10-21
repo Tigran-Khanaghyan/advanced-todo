@@ -2,9 +2,6 @@ export const WarningMessage = ({
   showWarning,
   setShowWarning,
   message,
-  showSectionWarning,
-  setShowSectionWarning,
-  sectionMessage,
 }) => {
   let classes = showWarning
     ? "alert alert-warning"
@@ -59,4 +56,12 @@ export const SectionWarningMessage = ({
 export function ErrorMessage({ message, showError }) {
   const classes = showError ? "danger" : "danger-hide";
   return <div className={classes}>{message}</div>;
+}
+
+export function deleteWarning() {
+  return (
+    <div>
+
+    </div>
+  )
 }
