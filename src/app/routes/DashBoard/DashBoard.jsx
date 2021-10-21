@@ -73,7 +73,7 @@ export default function DashBoard() {
         }
         todoIndex = todo.dataset.todo.split("-")[2];
         setTimeout(() => {
-          setIsSection(true);
+          setIsSection(false);
         }, 0);
       }
       setIsSection(false);
@@ -83,10 +83,8 @@ export default function DashBoard() {
       const data = event.dataTransfer.getData("todo");
       const todo = document.getElementById(data);
       let uid = todo.firstChild.id;
-      const section = event.target;
 
       if (isSection) {
-        section.append(todo);
         let buttonType = findHorizontalMoveDirection(
           currentSectionIndex,
           sectionIndex

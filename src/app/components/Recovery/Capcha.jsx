@@ -1,3 +1,3 @@
 export default function Capcha({ randomCode }) {
-  return <div className='capcha'>{randomCode}</div>;
+  return <div className="capcha">{randomCode}</div>;
 }

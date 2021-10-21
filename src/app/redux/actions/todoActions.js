@@ -3,6 +3,6 @@ export const addTodo = (todo, currentUserId, appName) => {
     type: "NEW_TODO",
     currentUserId,
     appName,
-    payload: todo
+    payload: todo,
   };
 };

@@ -12,7 +12,7 @@ export default function Tools() {
   const [modalType, setModalType] = useState();
   const [show, setShow] = useState();
   const [showWarning, setShowWarning] = useState(false);
-  const [showSectionWarning, setShowSectionWarning] = useState(false)
+  const [showSectionWarning, setShowSectionWarning] = useState(false);
 
   const store = useSelector((state) => state);
   const user = findCurrentUser(store);

@@ -3,6 +3,6 @@ export const idReducer = (state = null, action) => {
     case "USER_ID":
       return action.payload;
     default:
-      return state
+      return state;
   }
 };

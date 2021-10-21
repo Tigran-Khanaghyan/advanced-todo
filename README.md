@@ -10,4 +10,3 @@
 - react-router-dom
 
 Visit app via [link](https://advanced-todo.vercel.app/)
-

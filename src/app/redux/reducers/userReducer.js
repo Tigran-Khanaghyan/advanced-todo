@@ -2,11 +2,7 @@ import { addNewSection } from "../../../helpers/sectionInfoHandlers/addNewSectio
 import { findUserSections } from "../../../helpers/sectionInfoHandlers/findUserSections";
 import { moveSection } from "../../../helpers/sectionInfoHandlers/moveSection";
 import { replaceSection } from "../../../helpers/sectionInfoHandlers/replaceSection";
-import { findTodo } from "../../../helpers/todoInfoHandlers/findTodo";
-import { findTodoSectionIndex } from "../../../helpers/todoInfoHandlers/findTodoSectionIndex";
-import { moveInsightSection } from "../../../helpers/todoInfoHandlers/moveTodoInsightSection";
-import { moveTodoIntoleft } from "../../../helpers/todoInfoHandlers/moveTodoIntoleft";
-import { moveTodoIntoRight } from "../../../helpers/todoInfoHandlers/moveTodoIntoRight";
+import { moveTodo } from "../../../services/moveTodo";
 
 export default function userReducer(users = [], action) {
   switch (action.type) {
@@ -26,29 +22,15 @@ export default function userReducer(users = [], action) {
       sections[0].todos.push(action.payload);
       return users;
     case "MOVE_TODO": {
-      const sections = findUserSections(users, action.userId, action.appName);
-      const index = findTodoSectionIndex(
+      moveTodo(
         users,
         action.userId,
         action.appName,
-        action.todoId
+        action.todoId,
+        action.direction,
+        action.currentIndex,
+        action.index
       );
-      const [section, todo] = findTodo(sections, action.todoId);
-      if (action.direction === "right") {
-        moveTodoIntoRight(sections, section, index, todo, action.todoId);
-        if (index + 2 === sections.length) {
-          todo.right = true;
-        }
-        todo.left = false;
-      } else if (action.direction === "left") {
-        moveTodoIntoleft(sections, section, index, todo, action.todoId);
-        if (index - 1 === 0) {
-          todo.left = true;
-        }
-        todo.right = false;
-      } else {
-        moveInsightSection(section, action.currentIndex, action.index);
-      }
       return users;
     }
     case "NEW_SECTION":
